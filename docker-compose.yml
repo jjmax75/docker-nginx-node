@@ -1,0 +1,21 @@
+version: "2"
+services:
+    nginx:
+      image: myloadbalancer
+      container_name: myloadbalancer
+      build: ./nginx/
+      ports:
+        - "8080:8080"
+      networks:
+        - backbone
+    nodejs:
+      container_name: mynodejs
+      image: mynodeapp
+      build: ./app/
+      networks:
+        - backbone
+      expose: 
+        - 3000
+networks:
+  backbone:
+    driver: bridge
